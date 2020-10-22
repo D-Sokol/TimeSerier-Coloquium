@@ -1,0 +1,15 @@
+# Latex temporary files
+**/*.swp
+**/*.aux
+**/*.bbl
+**/*.blg
+**/*.out
+**/*.log
+**/*.gz
+**/*.snm
+**/*.toc
+**/*.nav
+**/*.o
+**/*.synctex(busy)
+
+**/_minted*

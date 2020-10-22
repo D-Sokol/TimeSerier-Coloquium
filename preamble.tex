@@ -1,0 +1,66 @@
+\documentclass[12pt]{article}
+% Свежая версия шаблона здесь <https://www.overleaf.com/read/sqvxbnhgxxdm>
+
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage[final]{pdfpages}
+\usepackage{amsmath,amsthm,amssymb,unicode-math}
+\usepackage{wrapfig,multicol,tabularx,booktabs}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{xcolor}
+%\usepackage{slashbox} %% разделение ячеек таблиц
+%\usepackage{minted} %% листинги
+%\usepackage{ulem} %% зачеркивание текста
+
+
+\setmainlanguage{russian}
+\setotherlanguage{english}
+\setkeys{russian}{babelshorthands=true}
+
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{CMU Serif Roman}
+%\setmathfont{STIX Two Math}
+
+\newfontfamily{\cyrillicfont}{CMU Serif Roman}
+\newfontfamily{\cyrillicfontrm}{CMU Serif Roman}
+\newfontfamily{\cyrillicfonttt}{Courier New}
+\newfontfamily{\cyrillicfontsf}{CMU Serif Roman}
+\newcommand{\const}{\mathrm{const}}
+
+%\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+%\renewcommand{\thetable}{\thesection.\arabic{table}}
+%\numberwithin{equation}{section}
+\everymath{\displaystyle}
+\graphicspath{{./img/}}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\theoremstyle{definition}
+\newtheorem{definition}{Опр.}[]
+\theoremstyle{remark}
+\newtheorem{statement}{Утв.}[]
+\theoremstyle{plain}
+\newtheorem{theorem}{Теор.}[]
+\newtheorem{axiom}{Аксиома}[]
+\theoremstyle{definition}
+\newtheorem{example}{Пример}[]
+\addto\captionsrussian{
+  \renewcommand{\figurename}{Рис.}
+  \renewcommand{\tablename}{Табл.}
+  \renewcommand{\proofname}{$\square$}
+}
+
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi} % не работает
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\tr}{tr}
+
+\newcounter{QuestionID}
+\newcommand{\supersection}[1]{
+	\stepcounter{QuestionID}
+	\section*{\arabic{QuestionID}. #1}
+	\addcontentsline{toc}{section}{\arabic{QuestionID}. #1}
+}
