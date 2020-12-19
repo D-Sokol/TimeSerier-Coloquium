@@ -1,3 +1,15 @@
 % АRIМА-модели. Идентификация  АRІМА-моделей. Способы определения параметров моделей. Прогнозирование в АRIМА-моделях.
 
+\begin{definition}
+    \textbf{Моделью авторегрессии и скользящего среднего $\mathrm{ARMA}\left( p, q \right)$} называется класс моделей стационарных временных рядов, задаваемый уравнением следующего вида:
+    \begin{equation*}
+        y_t - \phi_1 y_{t-1} - \dots - \phi_p y_{t-p} = \delta + \eps_t - \theta_1 \eps_{t-1} - \dots - \theta_q \eps_{t-q},
+    \end{equation*}
+    или, в записи с использованием оператора лага,
+    \begin{equation*}
+        \Phi\left( L \right) y_t = \delta + \Theta \left( L \right) \eps_t,
+    \end{equation*}
+    где $\eps_t$ -- ошибки, удовлетворяющие условиям Гаусса-Маркова.
+\end{definition}
+
 

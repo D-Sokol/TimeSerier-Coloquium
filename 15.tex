@@ -1,3 +1,109 @@
 % Временные ряды. Свойства AR(1)-процесса. Свойства автокорреляционного процесса второго порядка AR(2). Свойства процессов скользящего среднего.
 
+Рассмотрим наиболее распространенные частные случаи моделей класса $\mathrm{ARMA}\left( p, q \right)$.
+
+\paragraph{Авторегрессионный процесс 1 порядка $\mathrm{AR}(1) = \mathrm{ARMA}(1, 0)$}
+
+Авторегрессионный процесс 1 порядка задается следующим уравнением:
+\begin{equation*}
+    y_t = \delta + \phi_1 y_{t-1} + \eps_t
+\end{equation*}
+
+Как будет показано ранее, этот процесс является стационарным при $|\phi_1| < 1$.
+В таком случае временной ряд обладает следующими свойствами:
+\begin{equation*}
+    \mean y_t = \frac{\delta}{1 - \phi_1}, \quad
+    \var y_t = \frac{\var \eps = \sigma^2}{1 - \phi_1^2}, \quad
+    \rho_k = \frac{\cov\left( y_t, y_{t-k} \right)}{\var y_t} = \phi_1^k
+\end{equation*}
+
+Частичная автокорреляционная функция процесса равна 0, за исключением начальных значений $\mathrm{PACF}(0) = 1$, $\mathrm{PACF}(1) = \mathrm{ACF}(1) = \phi_1$.
+Аналогичное свойство выполняется для всех моделей авторегрессионного процесса $\mathrm{PACF}_{\mathrm{AR\left( p \right)}}(k) = 0, k>p$.
+
+
+\paragraph{Авторегрессионный процесс 2 порядка $\mathrm{AR}(2) = \mathrm{ARMA}(2, 0)$}
+
+Будем считать, что $\delta = 0$, в таком случае матожидание ряда равно нулю, и модель задается следующим уравнением:
+\begin{equation}
+\label{15_1}
+    y_t = \phi_1 y_{t-1} + \phi_2 y_{t-2} + \eps_t
+\end{equation}
+
+Вычислим значения ковариационной функции при $k > 0$:
+\begin{gather}
+\nonumber
+    \gamma_k =
+    \cov\left( y_t, y_{t-k} \right) =
+    \cov\left( \phi_1 y_{t-1} + \phi_2 y_{t-2} + \eps_t, y_{t-k} \right) =
+    \phi_1 \gamma_{k-1} + \phi_2 \gamma_{k-2}\\
+\label{15_2}
+    \rho_k = \frac{\gamma_k}{\gamma_0} = \phi_1 \rho_{k-1} + \phi_2 \rho_{k-2}
+\end{gather}
+
+Так как из свойств автокорреляционной функции $\rho_0 = 1, \rho_{-1} = \rho_{1}$, то, подставляя в уравнение \eqref{15_2} значение $k=1$, получаем:
+\begin{equation*}
+    \rho_1 = \frac{\phi_1}{1 - \phi_2}
+    \implies
+    \rho_2 = \frac{\phi_1^2}{1 - \phi_2} + \phi_2
+    \implies
+    \dots
+\end{equation*}
+
+Значение дисперсии найдем, умножив обе части уравнения \eqref{15_1} на $y_t$ и взяв математическое ожидание:
+\begin{equation*}
+    \begin{cases}
+        \gamma_0 = \phi_1 \gamma_1 + \phi_2 \gamma_2 + \sigma^2,\\
+        \gamma_0 \rho_1 = \gamma_1,\\
+        \gamma_0 \rho_2 = \gamma_2.
+    \end{cases}
+\end{equation*}
+
+Решив полученную систему уравнений, находим
+\begin{equation*}
+    \var y_t = \gamma_0 = \frac{\left( 1 - \phi_2 \right) \sigma^2}{\left( 1 + \phi_2 \right) \left( 1 - \phi_1 - \phi_2 \right) \left( 1 + \phi_1 - \phi_2 \right)}
+\end{equation*}
+
+Отсюда получаем, что процесс стационарен, если
+\begin{equation*}
+    |\phi_2| < 1, \quad
+    \phi_1 + \phi_2 < 1, \quad
+    \phi_2 - \phi_1 < 1.
+\end{equation*}
+
+Заметим, что эти же условия можно вывести, потребовав, чтобы корни многочлена $1 - \phi_1 L - \phi_2 L^2$ лежали вне единичного круга.
+
+\paragraph{Процесс скользящего среднего $\mathrm{MA\left( q \right) = \mathrm{ARMA}\left( 0, q \right)}$}
+
+Процесс скользящего среднего задается уравнением вида:
+\begin{equation*}
+    y_t =
+    \delta + \eps_t - \theta_1 \eps_{t-1} - \dots - \theta_q \eps_{t-q} =
+    \delta + \Theta(L) \eps_t.
+\end{equation*}
+
+Вычислим характеристики процесса, для удобства записи обозначив $\theta_0 = -1$:
+\begin{gather*}
+    \mean y_t = \delta,\\
+    \var y_t = \var \delta + \var \eps_t + \theta_1^2 \eps_{t-1} + \dots + \theta_q^2 \var \eps_{t-q} = \sigma^2 \cdot \left( 1 + \sum_{i=1}^{q} \theta_i^2 \right),\\
+    \gamma_k =
+    \sum_{i=0}^{q} \sum_{j=0}^{q} \theta_i \theta_j \cov\left( \eps_{t-i}, \eps_{t-k-j} \right) =
+    \sum_{i=0}^{q} \sum_{j=0}^{q} \theta_i \theta_j \sigma^2 \delta_{t-i, t-k-j}.
+\end{gather*}
+
+Видно, что ожидание, дисперсия и ковариации процесса не зависят от времени, то есть при любых параметрах процесс стационарен в широком смысле.
+Кроме того, при $k > q$ ковариация $\gamma_k$, а значит, и $\mathrm{ACF}\left( k \right)$, равны нулю, а частичная автокорреляционная функция экспоненциально убывает.
+
+Рассмотрим подробнее процесс $\mathrm{MA}\left( 1 \right)$:
+\begin{equation*}
+    y_t = \delta + \Theta\left( L \right) \eps_t,  % <-- вот он!
+    \Theta\left( L \right) = 1 - \theta_1 L
+\end{equation*}
+
+Если $|\theta_1| < 1$, то оператор $\Theta\left( L \right)$ обратим, и процесс можно представить в виде авторегрессионного процесса $\mathrm{AR}\left( \infty \right)$:
+\begin{align*}
+    y_t &= \delta + \Theta\left( L \right) \eps_t,\\
+    \Theta\left( L \right)^{-1} y_t &= \Theta\left( L \right)^{-1} \delta + \eps_t,\\
+    y_t + \theta_1 y_{t-1} + \theta_1^2 y_{t-2} + \dots &= \frac{\delta}{1 - \theta_1} + \eps_t, \\
+    y_t &= \frac{\delta}{1 - \theta_1} - \theta_1 y_{t-1} - \theta_1^2 y_{t-2} - \dots + \eps_t.
+\end{align*}
 
